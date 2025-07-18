@@ -13,8 +13,13 @@ export default class View {
   dailyForecastContainer = document.querySelector('.daily-forecast-container');
   dailyForecastList =
     this.dailyForecastContainer.querySelector('.weather-day-list');
+  errorMessage = document.createElement('p');
 
-  renderLocationForecast(forecast, day) {
+  constructor() {
+    this.errorMessage.style.color = "red";
+  }
+
+  renderDayForecast(forecast, day) {
     this.weatherForm.reset();
     let forecastDay = forecast.daily[day];
     this.temperatureP.textContent = `Temperature: ${
@@ -31,7 +36,7 @@ export default class View {
       day && forecastDay.name.long
         ? forecastDay.name.long
         : forecast.daily[0].name.long
-    }${day === undefined || day === 0? ", " + forecast.daily[0].time: ""}`;
+    }${day === undefined || day === 0 ? ', ' + forecast.daily[0].time : ''}`;
     this.humidityP.textContent = `Humidity: ${
       day ? forecastDay.humidity : forecast.daily[0].humidity
     }%`;
@@ -69,10 +74,22 @@ export default class View {
       weatherDayLi.append(dayNameP, dayInfoDiv);
       dayInfoDiv.append(weatherStatePic, temperatureP);
       let switchForecastDay = function () {
-        this.renderLocationForecast(forecast, dayIndex);
+        this.renderDayForecast(forecast, dayIndex);
       };
       weatherDayLi.addEventListener('click', switchForecastDay.bind(this));
     });
+  }
+
+  renderForecast(forecast) {
+    this.weatherForm.reset();
+    this.errorMessage.remove();
+    this.renderDayForecast(forecast);
+    this.renderDailyForecast(forecast);
+  }
+
+  renderErrorMessage(message) {
+    this.errorMessage.textContent = message;
+    this.weatherForm.append(this.errorMessage);
   }
 
   bindUpdateForecastLocation(updateForecastLocation) {
