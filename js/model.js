@@ -1,8 +1,8 @@
-import {apiKey} from '../env.js';
+import { apiKey } from '../env.js';
 
 export default class Model {
   locationForecast;
-  startLocation = ["Kyiv", "Paris", "New-York"]
+  startLocation = ['Kyiv', 'Paris', 'New-York'];
 
   async setLocationForecast(location) {
     let geoCordinatesResponse = await fetch(
@@ -14,6 +14,7 @@ export default class Model {
       `https://api.openweathermap.org/data/3.0/onecall?lat=${geoCordinates.lat}&lon=${geoCordinates.lon}&units=metric&appid=${apiKey}`
     );
     let weatherInfo = await weatherResponse.json();
+    console.log(weatherInfo);
     this.locationForecast = {
       location: { name: geoCordinates.name, country: geoCordinates.country },
       currentTemperature: Math.round(weatherInfo.current.temp),
@@ -35,7 +36,6 @@ export default class Model {
         cloudiness: weatherDay.clouds,
         condition: {
           name: weatherDay.weather[0].main,
-          iconPath: `../media/${weatherDay.weather[0].id}.svg`,
         },
       };
       processedDay.temperature = {
@@ -54,10 +54,32 @@ export default class Model {
         );
       }
       if (i === 0) {
-        let hour = new Date(weatherInfo.current.dt * 1000).toLocaleString('en-GB', { hour: '2-digit' });
+        let hour = new Date(weatherInfo.current.dt * 1000).toLocaleString(
+          'en-GB',
+          { hour: '2-digit' }
+        );
         processedDay.temperature.current = Math.round(weatherInfo.current.temp);
         processedDay.time = `${hour}:00`;
       }
+      let iconPath = `./media/weather-icons/${weatherDay.weather[0].id}_day.svg`;
+      processedDay.condition.iconPath = await fetch(iconPath).then(
+        (response) => {
+          if (!response.ok) {
+            let conditionId = weatherDay.weather[0].id.toString();
+            for (let i = 2; i < 9; i++) {
+              let conditionGroup = new RegExp(`${i}[0-9]{2}`);
+              let matchesConditionGroup = conditionId.match(conditionGroup);
+              if (conditionId === '800') {
+                return `./media/weather-icons/800_day.svg`;
+              } else if (matchesConditionGroup) {
+                return `./media/weather-icons/${i}00_day.svg`;
+              }
+            }
+          } else {
+            return iconPath;
+          }
+        }
+      );
       this.locationForecast.daily.push(processedDay);
     }
   }
