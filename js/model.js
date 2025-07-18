@@ -5,6 +5,9 @@ export default class Model {
   startLocation = ['Kyiv', 'Paris', 'New-York'];
 
   async setLocationForecast(location) {
+    if (location === "" || !location) {
+      return false;
+    }
     let geoCordinatesResponse = await fetch(
       `http://api.openweathermap.org/geo/1.0/direct?q=${location}&limit=1&appid=${apiKey}`
     );
