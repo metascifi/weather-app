@@ -1,0 +1,1 @@
+export let apiKey = '0bc7eab5aaccbf04d50ce5f3990e6862'

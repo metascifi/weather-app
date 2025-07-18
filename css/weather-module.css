@@ -1,0 +1,104 @@
+.weather-module {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
+  padding: 0px 20px;
+  width: 50%;
+  height: 100vh;
+  justify-content: center;
+}
+
+.weather-module * {
+  font-family: Arial, Helvetica, sans-serif;
+  font-style: italic;
+  color: white;
+  font-size: 20px;
+}
+
+.weather-module > * {
+  width: 100%;
+  margin-bottom: 40px;
+}
+
+.current-forecast {
+  width: 80%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+.sub-info-left > *:not(:last-child){
+  margin-bottom: 5px;
+}
+
+.sub-info-right {
+  display: flex;
+  flex-direction: column;
+}
+
+.sub-info-right .weather-state-pic {
+  width: 50px;
+  height: auto;
+  align-self: flex-end;
+  margin-bottom: 5px;
+}
+
+.sub-info-right .add-info {
+  text-align: end;
+}
+
+.weather-form {
+  display: flex;
+  justify-content: center;
+}
+
+.weather-form .location-input{
+  background-color: #FFFFFF6B;
+  color: #0000006B;
+  padding: 8px 20px;
+  border-radius: 12px;
+  width: 70%;
+  box-shadow: -2px 2px 4px  #0000006B;
+}
+.daily-forecast-container{
+  display: flex;
+  justify-content: center;
+}
+
+.weather-day-list {
+  display: flex;
+  flex-wrap: wrap;
+  row-gap: 10px;
+  column-gap: 5px;
+  justify-content: space-between;
+  width: 80%;
+}
+
+.weather-day { 
+  cursor: pointer;
+}
+.weather-day .day-name{
+  text-align: center;
+  margin-bottom: 3px;
+}
+
+.day-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #E0B3B3AF;
+  padding: 6px 1.5vh;
+  border-radius: 12px;
+  box-shadow: 0 2px rgb(0, 0, 0, 0.25);
+}
+
+.day-info .weather-state-pic {
+  width: 35px;
+  height: auto;
+  padding-bottom: 2px;
+}
+
+.day-info .temperature {
+  font-size: calc(20px / 1.3);
+}

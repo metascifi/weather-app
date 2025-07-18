@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/index.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+      <div class="weather-module">
+        <div class="current-forecast">
+          <div class="sub-info-left">
+            <p class="temperature-p"></p>
+            <p class="location-p"></p>
+            <p class="date-p"></p>
+          </div>
+          <div class="sub-info-right">
+            <img class="weather-state-pic"></img>
+            <div class="add-info">
+              <p class="humidity-p"></p>
+              <p class="cloudiness-p"></p>
+              <p class="precips-p"></p>
+            </div>
+          </div>
+        </div>
+        <form class="weather-form" action="#">
+          <input
+            type="text"
+            placeholder="Enter your city..."
+            class="location-input"
+          />
+        </form>
+        <div class="daily-forecast-container">
+          <ul class="weather-day-list">
+          </ul>
+        </div>
+      </div>
+    </div>
+    <script src="js/app.js" type="module"></script>
+  </body>
+</html>
