@@ -17,6 +17,7 @@ export default class View {
 
   constructor() {
     this.errorMessage.style.color = "red";
+    this.errorMessage.style.marginTop = "5px";
   }
 
   renderDayForecast(forecast, day) {

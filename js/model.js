@@ -10,6 +10,10 @@ export default class Model {
     );
     let geoCordinates = await geoCordinatesResponse.json();
     geoCordinates = geoCordinates[0];
+    if (!geoCordinates) {
+      this.initErrorMessage("This location doesn't exist!");
+      return false;
+    }
     let weatherResponse = await fetch(
       `https://api.openweathermap.org/data/3.0/onecall?lat=${geoCordinates.lat}&lon=${geoCordinates.lon}&units=metric&appid=${apiKey}`
     );

@@ -5,6 +5,7 @@ export default class Controller {
     this.view.bindUpdateForecastLocation(
       this.updateForecastLocation.bind(this)
     );
+    this.model.initErrorMessage = this.updateErrorMessage.bind(this);
     this.updateForecastLocation(
       this.model.startLocation[
         Math.floor(Math.random() * this.model.startLocation.length)
@@ -13,9 +14,12 @@ export default class Controller {
   }
 
   async updateForecastLocation(location) {
-    await this.model.setLocationForecast(location);
-    console.log(this.model.locationForecast);
-    this.view.renderLocationForecast(this.model.locationForecast);
-    this.view.renderDailyForecast(this.model.locationForecast);
+    if (await this.model.setLocationForecast(location) !== false){
+      this.view.renderForecast(this.model.locationForecast);
+    }
+  }
+
+  updateErrorMessage(message) {
+    this.view.renderErrorMessage(message);
   }
 }
