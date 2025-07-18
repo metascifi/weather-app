@@ -9,7 +9,7 @@ export default class Model {
       return false;
     }
     let geoCordinatesResponse = await fetch(
-      `http://api.openweathermap.org/geo/1.0/direct?q=${location}&limit=1&appid=${apiKey}`
+      `https://api.openweathermap.org/geo/1.0/direct?q=${location}&limit=1&appid=${apiKey}`
     );
     let geoCordinates = await geoCordinatesResponse.json();
     geoCordinates = geoCordinates[0];
